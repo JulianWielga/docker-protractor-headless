@@ -22,4 +22,5 @@ ADD protractor.sh /protractor.sh
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 WORKDIR /protractor
+EXPOSE 4444 5999
 ENTRYPOINT ["/protractor.sh"]
