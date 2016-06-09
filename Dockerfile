@@ -3,21 +3,17 @@ WORKDIR /tmp
 
 RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN apt-get update
-RUN apt-get -y install default-jre  # if not installed yet
-RUN npm install protractor -g
-RUN webdriver-manager update
-RUN ln /usr/lib/node_modules/protractor/selenium/chromedriver /usr/bin/chromedriver
 
-RUN apt-get -y install libxpm4 libxrender1 libgtk2.0-0 libnss3 libgconf-2-4
-RUN apt-get -y install google-chrome-stable
-
-RUN apt-get -y install xvfb gtk2-engines-pixbuf
-RUN apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
-
+RUN apt-get update -y
+RUN apt-get -y install libxpm4 libxrender1 libgtk2.0-0 libnss3 libgconf-2-4 openjdk-7-jre-headless
+RUN apt-get -y install xvfb gtk2-engines-pixbuf x11vnc
 RUN apt-get -y install imagemagick x11-apps
+RUN apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
+RUN apt-get -y install google-chrome-stable firefox
 
+RUN npm install protractor -g
 RUN npm install -g mocha jasmine coffee-script
+RUN webdriver-manager update
 
 RUN mkdir /protractor
 ADD protractor.sh /protractor.sh
