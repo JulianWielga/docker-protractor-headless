@@ -15,12 +15,13 @@ RUN npm install protractor -g
 RUN npm install -g mocha jasmine coffee-script
 RUN webdriver-manager update
 
-RUN mkdir /protractor
-ADD protractor.sh /protractor.sh
+RUN mkdir /project
+ADD protractor.sh /entry.sh
 
 # Fix for the issue with Selenium, as described here:
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-WORKDIR /protractor
-EXPOSE 4444 5999
-ENTRYPOINT ["/protractor.sh"]
+WORKDIR /project
+
+# EXPOSE 4444 5999
+ENTRYPOINT ["/entry.sh"]
